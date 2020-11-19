@@ -1,0 +1,47 @@
+<div class='container'>
+  <!-- エラーメッセージ -->
+  <%= render 'layouts/error_messages', value: @newbook %>
+  <div class='row'>
+    <!--サイドカラム-->
+    <div class='col-md-3'>
+      <%= render 'layouts/sidebar', user:current_user, book: @newbook %>
+    </div>
+    <!--メインカラム-->
+    <div class='col-md-8 offset-md-1'>
+
+      <!-- 書籍一覧テーブル -->
+      <h2>Books</h2>
+      <table class='table table-hover table-inverse'>
+        <!-- テーブルタイトル -->
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <!-- テーブル中身 -->
+        <% @books.each do |book| %>
+          <tbody>
+            <tr>
+              <td>
+                <% user = User.find_by(id: book.user_id) %>
+                <%= link_to user_path(user) do %>
+                  <%= attachment_image_tag user, :profile_image, size:'40x40', fallback: "no_image.jpg" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to book_path(book) do %>
+                  <%= book.title %>
+                <% end %>
+              </td>
+              <td>
+                <%= book.body %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
