@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
     # ユーザ登録時にユーザ名(name) の操作を許可する
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
     # ログイン時にユーザ名(name) の操作を許可する
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :email])
   end
 end
